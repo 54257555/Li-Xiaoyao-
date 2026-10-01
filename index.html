@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>李逍遥修真传 · 官方首页</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== 全局重置与字体 ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ink: #1a1a2e;
+      --ink-light: #16213e;
+      --gold: #c9a96e;
+      --gold-bright: #e8c987;
+      --jade: #4a7c6f;
+      --mist: #e8e4df;
+      --smoke: rgba(255, 255, 255, 0.06);
+      --font-serif: "Noto Serif SC", "Songti SC", "SimSun", serif;
+      --font-sans: "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    body {
+      background-color: var(--ink);
+      color: var(--mist);
+      font-family: var(--font-sans);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== 水墨底纹 ===== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(74, 124, 111, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(201, 169, 110, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 80%, rgba(74, 124, 111, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== 顶部导航 ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26, 26, 46, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .nav-brand i {
+      font-size: 1.4rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(232, 228, 223, 0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), #b8944f);
+      color: var(--ink) !important;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem !important;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(201, 169, 110, 0.3);
+    }
+
+    /* ===== 英雄区 ===== */
+    .hero {
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text .book-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--jade);
+      border: 1px solid rgba(74, 124, 111, 0.5);
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-serif);
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      letter-spacing: 6px;
+      line-height: 1.3;
+      margin-bottom: 20px;
+      text-shadow: 0 0 40px rgba(201, 169, 110, 0.25);
+    }
+
+    .hero-text .subtitle {
+      font-size: 1.05rem;
+      color: rgba(232, 228, 223, 0.65);
+      max-width: 500px;
+      margin-bottom: 32px;
+      line-height: 1.9;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 36px;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-item .num {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .stat-item .label {
+      font-size: 0.8rem;
+      color: rgba(232, 228, 223, 0.45);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--gold), #a8833e);
+      color: var(--ink);
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(201, 169, 110, 0.35);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(201, 169, 110, 0.4);
+      color: var(--gold);
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(201, 169, 110, 0.1);
+      border-color: var(--gold);
+    }
+
+    /* ===== 封面卡片 ===== */
+    .hero-cover {
+      position: relative;
+    }
+
+    .cover-card {
+      background: linear-gradient(160deg, #1f2b3a, #141c2b);
+      border: 1px solid rgba(201, 169, 110, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      transition: transform 0.4s;
+    }
+
+    .cover-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .cover-visual {
+      height: 300px;
+      background:
+        radial-gradient(ellipse at 50% 120%, rgba(74, 124, 111, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse at 30% 30%, rgba(201, 169, 110, 0.15) 0%, transparent 60%),
+        linear-gradient(180deg, #0f1520 0%, #1a2636 50%, #0d1520 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-visual .sword-icon {
+      font-size: 5rem;
+      color: rgba(201, 169, 110, 0.3);
+      position: relative;
+      z-index: 2;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .cover-visual::after {
+      content: "";
+      position: absolute;
+      bottom: -40px;
+      left: -20%;
+      width: 140%;
+      height: 100px;
+      background: radial-gradient(ellipse, rgba(74, 124, 111, 0.4) 0%, transparent 70%);
+      filter: blur(20px);
+    }
+
+    .cover-info {
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid rgba(201, 169, 110, 0.12);
+    }
+
+    .cover-info .author {
+      font-size: 0.85rem;
+      color: rgba(232, 228, 223, 0.5);
+      letter-spacing: 1px;
+    }
+
+    .cover-info .author span {
+      color: var(--gold);
+    }
+
+    .cover-info .status {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: var(--jade);
+      border: 1px solid rgba(74, 124, 111, 0.5);
+      padding: 2px 12px;
+      border-radius: 10px;
+      letter-spacing: 1px;
+    }
+
+    /* ===== 通用区块 ===== */
+    .section {
+      padding: 80px 0;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      color: var(--gold-bright);
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: rgba(232, 228, 223, 0.45);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 52px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 20px;
+    }
+
+    /* ===== 章节列表 ===== */
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .chapter-item {
+      background: var(--smoke);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 20px 22px;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chapter-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--gold);
+      transform: scaleY(0);
+      transition: transform 0.3s;
+      transform-origin: bottom;
+    }
+
+    .chapter-item:hover {
+      background: rgba(201, 169, 110, 0.06);
+      border-color: rgba(201, 169, 110, 0.2);
+      transform: translateX(4px);
+    }
+
+    .chapter-item:hover::before {
+      transform: scaleY(1);
+    }
+
+    .chapter-item .ch-num {
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .chapter-item .ch-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: rgba(232, 228, 223, 0.85);
+      margin-bottom: 8px;
+    }
+
+    .chapter-item .ch-meta {
+      font-size: 0.75rem;
+      color: rgba(232, 228, 223, 0.35);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ===== 角色卡片 ===== */
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .char-card {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 28px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .char-card:hover {
+      border-color: rgba(201, 169, 110, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .char-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .char-avatar.male {
+      background: rgba(74, 124, 111, 0.2);
+      color: var(--jade);
+      border: 1px solid rgba(74, 124, 111, 0.4);
+    }
+
+    .char-avatar.female {
+      background: rgba(201, 169, 110, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(201, 169, 110, 0.3);
+    }
+
+    .char-avatar.mystery {
+      background: rgba(120, 100, 160, 0.15);
+      color: #9b8ab8;
+      border: 1px solid rgba(120, 100, 160, 0.3);
+    }
+
+    .char-name {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--gold-bright);
+      margin-bottom: 4px;
+      letter-spacing: 2px;
+    }
+
+    .char-role {
+      font-size: 0.75rem;
+      color: var(--jade);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .char-desc {
+      font-size: 0.88rem;
+      color: rgba(232, 228, 223, 0.6);
+      line-height: 1.8;
+    }
+
+    /* ===== 世界观体系 ===== */
+    .realm-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .realm-table thead {
+      background: rgba(201, 169, 110, 0.1);
+    }
+
+    .realm-table th {
+      font-family: var(--font-serif);
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      padding: 16px 24px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .realm-table td {
+      padding: 14px 24px;
+      font-size: 0.88rem;
+      color: rgba(232, 228, 223, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .realm-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .realm-table tbody tr:hover {
+      background: rgba(201, 169, 110, 0.04);
+    }
+
+    .realm-table .realm-name {
+      color: var(--gold-bright);
+      font-weight: 600;
+    }
+
+    /* ===== 页脚 ===== */
+    .footer {
+      padding: 48px 0 32px;
+      border-top: 1px solid rgba(201, 169, 110, 0.12);
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      list-style: none;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(232, 228, 223, 0.4);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(232, 228, 223, 0.25);
+      letter-spacing: 1px;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-cover {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      .hero-text h1 {
+        font-size: 2.4rem;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 60px 0 50px;
+      }
+      .hero-text h1 {
+        font-size: 1.9rem;
+        letter-spacing: 3px;
+      }
+      .hero-stats {
+        gap: 24px;
+      }
+      .stat-item .num {
+        font-size: 1.3rem;
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+      .btn-primary,
+      .btn-ghost {
+        justify-content: center;
+      }
+      .section {
+        padding: 56px 0;
+      }
+      .chapter-grid {
+        grid-template-columns: 1fr;
+      }
+      .realm-table th,
+      .realm-table td {
+        padding: 12px 14px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== 导航 ===== -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="nav-brand">
+        <i class="fas fa-mountain"></i>
+        李逍遥修真传
+      </a>
+      <ul class="nav-links">
+        <li><a href="#chapters">章节目录</a></li>
+        <li><a href="#characters">人物档案</a></li>
+        <li><a href="#world">修真体系</a></li>
+        <li><a href="#" class="nav-cta"><i class="fas fa-book-open"></i> 立即阅读</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== 英雄区 ===== -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="book-tag">仙侠 · 修真 · 连载中</div>
+          <h1>李逍遥<br>修真传</h1>
+          <p class="subtitle">
+            余杭镇少年李逍遥，一柄木剑走天涯。从客栈小二到蜀山掌门，从凡尘俗世到九霄仙界——剑起波澜，道心不移。番茄小说独家连载，讲述李逍遥不为人知的修真传奇。
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="num">328万</div>
+              <div class="label">总字数</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">9.6</div>
+              <div class="label">读者评分</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">1,247</div>
+              <div class="label">推荐票</div>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <a href="#" class="btn-primary">
+              <i class="fas fa-book-open"></i> 开始阅读
+            </a>
+            <a href="#chapters" class="btn-ghost">
+              <i class="fas fa-list-ul"></i> 查看目录
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-cover">
+          <div class="cover-card">
+            <div class="cover-visual">
+              <i class="fas fa-dragon sword-icon"></i>
+            </div>
+            <div class="cover-info">
+              <div class="author">作者 · <span>番茄小说签约作者</span></div>
+              <div class="status">连载中</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== 章节目录 ===== -->
+  <section class="section" id="chapters">
+    <div class="container">
+      <div class="divider"></div>
+      <h2 class="section-title">章节目录</h2>
+      <p class="section-desc">剑起余杭 · 道途初启</p>
+
+      <div class="chapter-grid">
+        <div class="chapter-item">
+          <div class="ch-num">第一卷 · 余杭篇</div>
+          <div class="ch-title">第一章 客栈少年</div>
+          <div class="ch-meta"><span>3,200字</span><span>刚刚更新</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第一卷 · 余杭篇</div>
+          <div class="ch-title">第二章 木剑与酒</div>
+          <div class="ch-meta"><span>2,850字</span><span>3天前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第一卷 · 余杭篇</div>
+          <div class="ch-title">第三章 仙灵岛奇遇</div>
+          <div class="ch-meta"><span>3,100字</span><span>5天前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第一卷 · 余杭篇</div>
+          <div class="ch-title">第四章 酒剑仙授艺</div>
+          <div class="ch-meta"><span>2,700字</span><span>1周前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第二卷 · 蜀山篇</div>
+          <div class="ch-title">第五章 御剑千里</div>
+          <div class="ch-meta"><span>3,400字</span><span>1周前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第二卷 · 蜀山篇</div>
+          <div class="ch-title">第六章 蜀山试炼</div>
+          <div class="ch-meta"><span>2,950字</span><span>2周前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第二卷 · 蜀山篇</div>
+          <div class="ch-title">第七章 天罡剑阵</div>
+          <div class="ch-meta"><span>3,600字</span><span>2周前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第三卷 · 问道篇</div>
+          <div class="ch-title">第八章 南诏风云</div>
+          <div class="ch-meta"><span>3,200字</span><span>3周前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第三卷 · 问道篇</div>
+          <div class="ch-title">第九章 女娲后人</div>
+          <div class="ch-meta"><span>2,800字</span><span>3周前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第三卷 · 问道篇</div>
+          <div class="ch-title">第十章 锁妖塔之战</div>
+          <div class="ch-meta"><span>4,100字</span><span>1个月前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第四卷 · 仙魔篇</div>
+          <div class="ch-title">第十一章 魔尊现世</div>
+          <div class="ch-meta"><span>3,500字</span><span>1个月前</span></div>
+        </div>
+        <div class="chapter-item">
+          <div class="ch-num">第四卷 · 仙魔篇</div>
+          <div class="ch-title">第十二章 剑指苍穹</div>
+          <div class="ch-meta"><span>3,800字</span><span>1个月前</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 人物档案 ===== -->
+  <section class="section" id="characters">
+    <div class="container">
+      <div class="divider"></div>
+      <h2 class="section-title">人物档案</h2>
+      <p class="section-desc">仗剑天涯 · 红尘作伴</p>
+
+      <div class="character-grid">
+        <div class="char-card">
+          <div class="char-avatar male"><i class="fas fa-male"></i></div>
+          <div class="char-name">李逍遥</div>
+          <div class="char-role">主角 · 蜀山掌门 · 逍遥真君</div>
+          <div class="char-desc">
+            余杭镇客栈小二出身，天资聪颖，悟性极高。得酒剑仙莫一兮传授蜀山剑法，后历经仙灵岛、锁妖塔、南诏之战，一步步从凡人成长为蜀山掌门。其剑法洒脱不羁，为人重情重义，终成一代仙侠传奇。
+          </div>
+        </div>
+
+        <div class="char-card">
+          <div class="char-avatar female"><i class="fas fa-female"></i></div>
+          <div class="char-name">赵灵儿</div>
+          <div class="char-role">女主角 · 女娲后人 · 南诏公主</div>
+          <div class="char-desc">
+            女娲族后裔，拥有与生俱来的灵力。性格温柔善良，却肩负着守护苍生的宿命。与李逍遥在仙灵岛相遇，二人历经磨难，情深义重。其灵力可操控水火，亦可治愈万物。
+          </div>
+        </div>
+
+        <div class="char-card">
+          <div class="char-avatar mystery"><i class="fas fa-wine-bottle"></i></div>
+          <div class="char-name">酒剑仙</div>
+          <div class="char-role">蜀山派 · 李逍遥之师</div>
+          <div class="char-desc">
+            本名莫一兮，蜀山派长老，嗜酒如命却剑法通神。性格豪放不羁，游戏人间。早年云游至余杭，见李逍遥根骨奇佳，遂授以蜀山御剑之术。其"酒神咒"名震天下。
+          </div>
+        </div>
+
+        <div class="char-card">
+          <div class="char-avatar female"><i class="fas fa-fan"></i></div>
+          <div class="char-name">林月如</div>
+          <div class="char-role">林家堡千金 · 女侠</div>
+          <div class="char-desc">
+            武林世家林家堡的掌上明珠，性格刚烈直爽，剑法凌厉。与李逍遥不打不相识，从欢喜冤家到生死知己。其"斩龙诀"威力惊人，是江湖中令人闻风丧胆的女侠。
+          </div>
+        </div>
+
+        <div class="char-card">
+          <div class="char-avatar mystery"><i class="fas fa-dragon"></i></div>
+          <div class="char-name">魔尊</div>
+          <div class="char-role">反派 · 魔族之主</div>
+          <div class="char-desc">
+            魔族至高统治者，力量深不可测。企图打破人仙魔三界平衡，吞噬人间灵气。与蜀山派千年恩怨，是李逍遥修真路上最强大的对手。其真实身份与目的，是贯穿全书的终极谜团。
+          </div>
+        </div>
+
+        <div class="char-card">
+          <div class="char-avatar male"><i class="fas fa-shield-alt"></i></div>
+          <div class="char-name">剑圣</div>
+          <div class="char-role">蜀山派掌门 · 殷若拙</div>
+          <div class="char-desc">
+            蜀山派第二十六代掌门，修为通天，剑道通神。为人刚正不阿，以守护三界为己任。对李逍遥既是严师又是慈父，在关键时刻屡次出手相助，是李逍遥修真路上的引路人。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 修真体系 ===== -->
+  <section class="section" id="world">
+    <div class="container">
+      <div class="divider"></div>
+      <h2 class="section-title">修真体系</h2>
+      <p class="section-desc">九重天阶 · 步步登仙</p>
+
+      <table class="realm-table">
+        <thead>
+          <tr>
+            <th>境界</th>
+            <th>特征</th>
+            <th>能力</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="realm-name">后天期</td>
+            <td>初入修行，淬炼肉身</td>
+            <td>力大无穷，身轻如燕，可日行千里</td>
+          </tr>
+          <tr>
+            <td class="realm-name">先天期</td>
+            <td>真气化液，沟通天地</td>
+            <td>御剑飞行，神识外放，感知方圆百里</td>
+          </tr>
+          <tr>
+            <td class="realm-name">金丹期</td>
+            <td>凝聚金丹，寿元大增</td>
+            <td>法术通玄，金丹不灭则肉身可重塑</td>
+          </tr>
+          <tr>
+            <td class="realm-name">元婴期</td>
+            <td>金丹化婴，神魂独立</td>
+            <td>元婴出窍，夺舍重生，操控天地灵气</td>
+          </tr>
+          <tr>
+            <td class="realm-name">化神期</td>
+            <td>神念如海，法则初悟</td>
+            <td>一念之间可移山填海，沟通天地法则</td>
+          </tr>
+          <tr>
+            <td class="realm-name">渡劫期</td>
+            <td>天劫降临，洗尽凡尘</td>
+            <td>渡过九重天劫，飞升仙界，与天地同寿</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <i class="fas fa-mountain"></i> 李逍遥修真传
+      </div>
+      <ul class="footer-links">
+        <li><a href="#">关于本书</a></li>
+        <li><a href="#">读者评论</a></li>
+        <li><a href="#">作者专区</a></li>
+        <li><a href="#">番茄小说</a></li>
+        <li><a href="#">意见反馈</a></li>
+      </ul>
+      <div class="footer-copy">
+        © 2025 番茄小说 · 李逍遥修真传 · 版权所有
+      </div>
+    </div>
+  </footer>
+
+</body>
+          </html>
